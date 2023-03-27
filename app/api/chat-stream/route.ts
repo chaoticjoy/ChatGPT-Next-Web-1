@@ -8,7 +8,8 @@ async function createStream(payload: ReadableStream<Uint8Array>) {
   const encoder = new TextEncoder();
   const decoder = new TextDecoder();
 
-  const res = await fetch("https://api.openai.com/v1/chat/completions", {
+  const apiUrl = process.env.OPENAI_API_BASE_URL ? process.env.OPENAI_API_BASE_URL : "https://api.openai.com/v1/chat/completions";
+  const res = await fetch(apiUrl, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${apiKey}`,
